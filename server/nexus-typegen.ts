@@ -4,7 +4,7 @@
  */
 
 
-
+import type { Context } from "./src/context"
 
 
 
@@ -28,7 +28,22 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthPayload: { // root type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  Link: { // root type
+    description: string; // String!
+    id: string; // String!
+    url: string; // String!
+  }
+  Mutation: {};
   Query: {};
+  User: { // root type
+    email: string; // String!
+    id: string; // String!
+    name: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -42,18 +57,80 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  Link: { // field return type
+    description: string; // String!
+    id: string; // String!
+    postedBy: NexusGenRootTypes['User'] | null; // User
+    url: string; // String!
+  }
+  Mutation: { // field return type
+    createLink: NexusGenRootTypes['Link']; // Link!
+    deleteLink: NexusGenRootTypes['Link']; // Link!
+    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+  }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    links: NexusGenRootTypes['Link'][]; // [Link!]!
+  }
+  User: { // field return type
+    email: string; // String!
+    id: string; // String!
+    links: NexusGenRootTypes['Link'][]; // [Link!]!
+    name: string; // String!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    token: 'String'
+    user: 'User'
+  }
+  Link: { // field return type name
+    description: 'String'
+    id: 'String'
+    postedBy: 'User'
+    url: 'String'
+  }
+  Mutation: { // field return type name
+    createLink: 'Link'
+    deleteLink: 'Link'
+    login: 'AuthPayload'
+    signup: 'AuthPayload'
+  }
   Query: { // field return type name
-    ok: 'Boolean'
+    links: 'Link'
+  }
+  User: { // field return type name
+    email: 'String'
+    id: 'String'
+    links: 'Link'
+    name: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createLink: { // args
+      description: string; // String!
+      url: string; // String!
+    }
+    deleteLink: { // args
+      id: string; // String!
+    }
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    signup: { // args
+      email: string; // String!
+      name: string; // String!
+      password: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -87,7 +164,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

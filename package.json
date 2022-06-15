@@ -4,12 +4,18 @@
     "generate": "ts-node --transpile-only server/src/schema.ts"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.5.8",
+    "prisma": "^3.15.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.3"
   },
   "dependencies": {
+    "@prisma/client": "^3.15.1",
     "apollo-server": "^3.8.2",
+    "bcryptjs": "^2.4.3",
     "graphql": "^16.5.0",
+    "jsonwebtoken": "^8.5.1",
     "nexus": "^1.3.0"
   }
 }
