@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken';
 export const APP_SECRET = 'GraphQL-is-aw3some';
 
 export interface AuthTokenPayload {
-  userId: string;
+  userId: number;
 }
 
 export function decodeAuthHeader(authHeader: String): AuthTokenPayload {

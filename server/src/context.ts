@@ -5,7 +5,7 @@ import { decodeAuthHeader } from './utils/auth';
 
 export interface Context {
   prisma: PrismaClient;
-  userId?: string;
+  userId?: number;
 }
 
 export const context = ({ req }: { req: Request }): Context => {

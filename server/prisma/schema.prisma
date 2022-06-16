@@ -3,27 +3,25 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Link {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   description String
   url         String
-  postedBy    User?    @relation(fields: [postedById], references: [id])
-  postedById  String?  @db.ObjectId
-
-  @@map("postedBy")
+  postedBy    User?    @relation(name: "PostedBy", fields: [postedById], references: [id])
+  postedById  Int?
+  voters      User[]   @relation(name: "Votes")
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id       Int    @id @default(autoincrement())
   name     String
   email    String @unique
   password String
-  links    Link[]
-
-  @@map("links")
+  links    Link[] @relation(name: "PostedBy")
+  votes    Link[] @relation(name: "Votes")
 }
